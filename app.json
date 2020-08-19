@@ -1,0 +1,12 @@
+{
+  "name": "JustAnotherReact",
+  "displayName": "JustAnotherReact",
+  "expo": {
+    "name": "JustAnotherReact",
+    "slug": "JustAnotherReact",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
