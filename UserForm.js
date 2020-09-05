@@ -1,52 +1,65 @@
 import React, { useState, useEffect } from 'react'
 import { TextInput } from 'react-native-gesture-handler'
 import { View , StyleSheet, Button ,Text, ToastAndroid} from 'react-native';
+import AnotherTextInput from './AnotherTextInput';
 
 
 
-export default function UserForm(props) {
-    const [name , setName] = useState("")
-    const [fullName , setFullName] = useState("")
-    const [email , setEmail] = useState("")
-    const [password , setPassword] = useState("")
+export default function UserForm({
+        onChange , nameError , fullnameError , emailError , passwordError,
+        ...props
+    }) {
+    const [name , setName] = useState(props.name != null ? props.name : null)
+    const [fullname , setFullname] = useState(props.fullname != null ? props.fullname : null)
+    const [email , setEmail] = useState(props.email != null ? props.email : null)
+    const [password , setPassword] = useState(props.password != null ? props.password : null)
     const [data, setData] = useState({})
     useEffect(()=>{
-        data.name = name
-        data.fullName = fullName
-        data.password = password
-        data.email = email
-    },[name,fullName,email,password])
+        if(onChange != null) {
+            const user = {
+                name : name,
+                fullname : fullname,
+                password : password,
+                email : email
+            }
+            onChange(user)
+        }
+    },[name,fullname,email,password])
 
     return (
         <View>
-            <TextInput
+            <AnotherTextInput
                 onChangeText={(text)=>{
                     setName(text)
                 }}
+                errorText={nameError}
                 placeholder={"Username"}
                 defaultValue={name} 
                 style={styles.textInput} />
             <View style={styles.whiteSeparator}/>
-            <TextInput
+            <AnotherTextInput
                 onChangeText={(text)=>{
-                    setFullName(text)
+                    setFullname(text)
                 }}
-                defaultValue={fullName}
+                errorText={fullnameError}
+                defaultValue={fullname}
                 placeholder={"Fullname"} 
                 style={styles.textInput} />
             <View style={styles.whiteSeparator}/>
-            <TextInput
+            <AnotherTextInput
                 onChangeText={(text)=>{
                     setEmail(text)
                 }}            
                 defaultValue={email}
+                errorText={emailError}
                 placeholder={"Email"} 
                 style={styles.textInput} />
             <View style={styles.whiteSeparator}/>
-            <TextInput
+            <AnotherTextInput
                 onChangeText={(text)=>{
                     setPassword(text)
-                }}            
+                }}
+                errorText={passwordError}            
                 defaultValue={password}
                 secureTextEntry={true}
                 placeholder={"Password"} 

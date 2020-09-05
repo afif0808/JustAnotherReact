@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {StyleSheet,View, Text , TextInput, Button, Keyboard } from 'react-native'
-
+import AnotherTextInput from './AnotherTextInput.js'
+import AnotherButton from './AnotherButton.js'
 
 
 
@@ -16,45 +17,36 @@ export default function LoginForm(props) {
             props.handleFormChange(data)
         }
     },[name,password])
-
-
+    
     function handleLogIn(data) {
         if(props.handleLogIn != null) {
             props.handleLogIn(data)
         }
     }
 
-    
-
-
 
     const navigation = props.navigation
     return (
-        <View>
-            <TextInput
+        <View style={styles.container}>
+            <AnotherTextInput
                 placeholder={"Username"}
-                style={styles.textInput}
                 onChangeText={(text)=>{
                     setName(text)
                 }}/>   
             <View style={styles.whiteSeparator}/>         
-            <TextInput 
+            <AnotherTextInput 
                 secureTextEntry={true}
                 onChangeText={(text)=>{
                     setPassword(text)
                 }}
-                placeholder={"Password"}
-                style={styles.textInput}/>
-            <View style={styles.whiteSeparator}/>         
+                placeholder={"Password"}/>
+            <View style={styles.whiteSeparator}/>  
+         
         </View>
     )    
 }
 const styles = StyleSheet.create({
-    textInput : {
-        borderWidth : 1,
-        borderColor:"#ccc",
-        padding : 10,
-        width : "100%",
+    container : {
     },
     lineSeparator : {
         margin : 5,

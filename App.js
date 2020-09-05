@@ -11,6 +11,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import LoginForm from './LoginForm.js'
 import UserForm from './UserForm.js'
+import LoginScreen from './LoginScreen.js';
+import WhiteScreen from './WhiteScreen.js';
+import RegisterScreen from './RegisterScreen.js';
+import AnotherTextInput from './AnotherTextInput.js';
 
 
 const Stack = createStackNavigator()
@@ -19,7 +23,7 @@ function Another(props) {
   const [data , setData] = useState(null)
   return (
     <View>
-      <LoginForm 
+      <LoginForm  
         handleFormChange={(data)=>{
           setData(data)
         }} />
@@ -46,16 +50,18 @@ function Another(props) {
 }
 
 export default function App() {
+  const [err ,setErr] = useState("")
   return (
-    <NavigationContainer>      
-      <Stack.Navigator>
-        <Stack.Screen
-          name={"Login"}
-          component={Another}/>
-        <Stack.Screen 
-          name={"Register"}
-          component={UserForm}/>
-      </Stack.Navigator>
+    <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen 
+            name={"Register"}
+            component={RegisterScreen}/>
+          <Stack.Screen
+            name={"Login"}
+            options={{title : "Samase"}}
+            component={LoginScreen}/>
+        </Stack.Navigator>
     </NavigationContainer>
   );
 }
